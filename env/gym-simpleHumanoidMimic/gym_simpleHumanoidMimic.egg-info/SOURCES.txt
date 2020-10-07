@@ -1,0 +1,6 @@
+setup.py
+gym_simpleHumanoidMimic.egg-info/PKG-INFO
+gym_simpleHumanoidMimic.egg-info/SOURCES.txt
+gym_simpleHumanoidMimic.egg-info/dependency_links.txt
+gym_simpleHumanoidMimic.egg-info/requires.txt
+gym_simpleHumanoidMimic.egg-info/top_level.txt

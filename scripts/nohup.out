@@ -1,0 +1,366 @@
+Traceback (most recent call last):
+  File "train_obs_act_norm.py", line 5, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+Traceback (most recent call last):
+  File "train_obs_act_norm.py", line 8, in <module>
+    from src.custom_callbacks import SaveGifCallback, DiscRwdTerminate
+ModuleNotFoundError: No module named 'src'
+Traceback (most recent call last):
+  File "train_obs_act_norm.py", line 8, in <module>
+    from src.custom_callbacks import SaveGifCallback, DiscRwdTerminate
+ModuleNotFoundError: No module named 'src'
+pybullet build time: Jun 19 2020 04:01:58
+b3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lankle/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:516: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:517: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:518: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:519: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:520: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:525: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:541: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:542: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:543: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:544: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:545: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:550: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
+
+================ note ================
+run_09300047 obs act norm test
+obs normalized, action un-normalized
+action norm init param revised
+actor: [512, 256], critic: [512, 256]
+n_steps: 8192
+obs histogram, action dividing norm
+======================================
+pybullet build time: Jun 19 2020 04:01:58
+b3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lankle/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:516: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:517: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:518: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:519: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:520: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:525: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:541: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:542: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:543: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:544: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:545: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:550: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
+
+================ note ================
+run_09301609 obs act norm test
+obs normalized, action normalized
+action norm init param revised
+actor: [512, 256], critic: [512, 256]
+n_steps: 8192
+obs histogram, action dividing norm
+======================================
+pybullet build time: Jun 19 2020 04:01:58
+b3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lankle/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:516: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:517: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:518: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:519: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:520: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:525: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:541: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:542: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:543: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:544: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:545: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:550: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
+
+================ note ================
+run_10010219 obs act norm test
+obs normalized, action normalized
+action norm init param revised
+actor: [512, 256], critic: [512, 256]
+n_steps: 8192
+obs histogram, action dividing norm
+======================================
+pybullet build time: Jun 19 2020 04:01:58
+b3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lankle/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:516: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:517: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:518: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:519: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:520: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:525: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:541: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:542: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:543: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:544: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:545: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:550: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
+
+================ note ================
+run_10020351 obs act norm test
+obs normalized, action normalized
+action norm init param revised
+actor: [512, 256], critic: [512, 256]
+n_steps: 8192
+obs histogram, action dividing norm
+======================================
+pybullet build time: Jun 19 2020 04:01:58
+b3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lankle/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:516: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:517: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:518: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:519: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:520: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:525: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:541: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:542: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:543: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:544: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:545: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:550: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
+
+================ note ================
+run_10021459 obs act norm test
+obs normalized, action normalized
+action norm init param revised
+actor: [512, 256], critic: [512, 256]
+n_steps: 8192
+obs histogram, action dividing norm
+======================================
+pybullet build time: Jun 19 2020 04:01:58
+b3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+LankleTraceback (most recent call last):
+  File "train_obs_act_norm.py", line 7, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+pybullet build time: Jun 19 2020 04:01:58
+b3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Rankleb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lhipb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+urdfdom: no axis elemement for Joint, defaulting to (1,0,0) axisb3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+Lankle/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:516: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:517: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:518: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:519: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:520: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:525: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:541: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:542: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:543: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:544: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:545: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:550: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
+
+================ note ================
+run_10032342 obs act norm test
+obs normalized, action normalized
+action norm init param revised
+actor: [512, 256], critic: [512, 256]
+n_steps: 8192
+obs histogram, action dividing norm
+======================================
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:516: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:517: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:518: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:519: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:520: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:525: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:541: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:542: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:543: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:544: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:545: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+/home/user/anaconda3/envs/garage/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:550: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
+
+================ note ================
+run_10032345 obs act norm test
+obs normalized, action normalized
+action norm init param revised
+actor: [512, 256], critic: [512, 256]
+n_steps: 8192
+obs histogram, action dividing norm
+======================================

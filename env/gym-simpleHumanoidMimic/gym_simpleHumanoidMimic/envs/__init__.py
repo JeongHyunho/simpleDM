@@ -1,0 +1,1 @@
+from gym_simpleHumanoidMimic.envs.simpleHumanoidMimic_env import SimpleHumanoidMimicEnv
