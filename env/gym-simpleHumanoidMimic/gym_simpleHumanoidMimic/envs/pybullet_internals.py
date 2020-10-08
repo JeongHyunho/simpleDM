@@ -47,6 +47,12 @@ class PyBulletSimpleHumanoidMimicEnv:
         self._pybullet_client.setPhysicsEngineParameter(numSubSteps=1)
         self._pybullet_client.changeDynamics(self._planeId, linkIndex=-1, lateralFriction=0.9)
 
+        # reward parameters
+        self.w_orn = 0.65
+        self.w_avel = 0.1
+        self.w_end = 0.15
+        self.w_com = 0.1
+
         self.reset()
 
     def reset(self):
@@ -56,7 +62,7 @@ class PyBulletSimpleHumanoidMimicEnv:
 
         # set pose to be in current phase
         self._mocap.reset_pose(self._humanoid.sim, self._phase)
-        self._mocap.kin_update(self._humanoid.kin, self._phase, reset=True)
+        self._mocap.kin_update(self._humanoid.kin, self._phase, self._ncycle, reset=True)
 
         obs = self.get_obs()
         return obs
@@ -106,8 +112,7 @@ class PyBulletSimpleHumanoidMimicEnv:
                 action_ind += 1
         return pose
 
-    @property
-    def cal_reward(self):
+    def cal_reward(self, obs, action):
         sim_links = self._pybullet_client.getLinkStates(self._humanoid.sim,
                                                         range(NLINK),
                                                         computeForwardKinematics=True,
@@ -116,53 +121,82 @@ class PyBulletSimpleHumanoidMimicEnv:
                                                         range(NLINK),
                                                         computeForwardKinematics=True,
                                                         computeLinkVelocity=True)
-        w_orn, w_avel, w_end, w_com = 0.65, 0.1, 0.15, 0.1
         c_orn, c_avel, c_end, c_com = -2, -0.1, -40, -10
+
+        sim_root = sim_links[BASE][LINK_WORLD_POS]
+        kin_root = kin_links[BASE][LINK_WORLD_POS]
+        sim_base_lvel = sim_links[BASE][LINK_WORLD_LINVEL]
+        kin_base_lvel = kin_links[BASE][LINK_WORLD_LINVEL]
+        sim_base_rel_orn = self._humanoid.orn_along_lin_vel(sim_base_lvel)
+        kin_base_rel_orn = self._humanoid.orn_along_lin_vel(kin_base_lvel)
+        sim_to_base_orn = [-sim_base_rel_orn[0],
+                           -sim_base_rel_orn[1],
+                           -sim_base_rel_orn[2],
+                           -sim_base_rel_orn[3]]
+        kin_to_base_orn = [-kin_base_rel_orn[0],
+                           -kin_base_rel_orn[1],
+                           -kin_base_rel_orn[2],
+                           -kin_base_rel_orn[3]]
 
         orn_err_sqr = 0.
         avel_err_sqr = 0.
         sim_com = np.zeros(3)
         kin_com = np.zeros(3)
-        sim_root = sim_links[BASE][LINK_WORLD_POS]
-        kin_root = kin_links[BASE][LINK_WORLD_POS]
-        for link_ind in range(NLINK):
-            sim_orn = sim_links[link_ind][LINK_WORLD_ORN]
-            kin_orn = kin_links[link_ind][LINK_WORLD_ORN]
+        end_err_sqr = 0.
+        for link_ind in range(1, NLINK):
+            # orientation reward
+            sim_orn = sim_links[link_ind][LINK_LOCAL_ORN]
+            kin_orn = kin_links[link_ind][LINK_LOCAL_ORN]
             if link_ind in JOINT_SPHERICAL:
-                quat_diff = self._pybullet_client.getDifferenceQuaternion(sim_orn, kin_orn)
+                _, sim_rel_orn = self._pybullet_client.multiplyTransforms([0., 0., 0.],
+                                                                          sim_to_base_orn,
+                                                                          [0., 0., 0.],
+                                                                          sim_orn)
+                _, kin_rel_orn = self._pybullet_client.multiplyTransforms([0., 0., 0.],
+                                                                          kin_to_base_orn,
+                                                                          [0., 0., 0.],
+                                                                          kin_orn)
+                quat_diff = self._pybullet_client.getDifferenceQuaternion(sim_rel_orn, kin_rel_orn)
                 _, ang_diff = self._pybullet_client.getAxisAngleFromQuaternion(quat_diff)
                 orn_err_sqr += ang_diff * ang_diff
             elif link_ind in JOINT_REVOLUTE:
                 ang_diff = kin_orn[0] - sim_orn[0]
                 orn_err_sqr += ang_diff * ang_diff
 
+            # angular velocity reward
             sim_avel = sim_links[link_ind][LINK_WORLD_ANGVEL]
             kin_avel = kin_links[link_ind][LINK_WORLD_ANGVEL]
             if link_ind in JOINT_SPHERICAL:
-                avel_diff = [kin_avel[0] - sim_avel[0], kin_avel[1] - sim_avel[1], kin_avel[2] - sim_avel[2]]
+                sim_rel_avel = self._pybullet_client.rotateVector(sim_to_base_orn, sim_avel)
+                kin_rel_avel = self._pybullet_client.rotateVector(kin_to_base_orn, kin_avel)
+                avel_diff = [kin_rel_avel[0] - sim_rel_avel[0],
+                             kin_rel_avel[1] - sim_rel_avel[1],
+                             kin_rel_avel[2] - sim_rel_avel[2]]
                 avel_err_sqr += avel_diff[0] * avel_diff[0] + avel_diff[1] * avel_diff[1] + avel_diff[2] * avel_diff[2]
             elif link_ind in JOINT_REVOLUTE:
                 avel_diff = kin_avel[0] - sim_avel[0]
                 avel_err_sqr += avel_diff * avel_diff
 
-            if link_ind != BASE:
-                sim_com += self._humanoid.link_mass[link_ind] / self._humanoid.mass \
-                           * np.array(sim_links[link_ind][LINK_WORLD_POS]-sim_root)
-                kin_com += self._humanoid.link_mass[link_ind] / self._humanoid.mass \
-                           * np.array(kin_links[link_ind][LINK_WORLD_POS]-kin_root)
+            # com reward
+            sim_pos = np.array(sim_links[link_ind][LINK_WORLD_POS]) - np.array(sim_root)
+            kin_pos = np.array(kin_links[link_ind][LINK_WORLD_POS]) - np.array(kin_root)
+            sim_rel_pos = self._pybullet_client.rotateVector(sim_to_base_orn, sim_pos)
+            kin_rel_pos = self._pybullet_client.rotateVector(kin_to_base_orn, kin_pos)
+            sim_com += self._humanoid.link_mass[link_ind] / self._humanoid.mass * np.array(sim_rel_pos)
+            kin_com += self._humanoid.link_mass[link_ind] / self._humanoid.mass * np.array(kin_rel_pos)
 
-        end_err_sqr = 0.
-        for link_ind in self._humanoid.end_links:
-            sim_end = np.array(sim_links[link_ind][LINK_FRAME_POS])
-            kin_end = np.array(kin_links[link_ind][LINK_FRAME_POS])
-            end_err_sqr += np.linalg.norm(sim_end - kin_end)**2
+            # end effector reward
+            if link_ind in self._humanoid.end_links:
+                sim_rel_end = np.array(sim_rel_pos)
+                kin_rel_end = np.array(kin_rel_pos)
+                end_err_sqr += np.linalg.norm(sim_rel_end - kin_rel_end) ** 2
 
         com_err_sqr = np.linalg.norm(sim_com - kin_com)**2
 
-        r_orn = w_orn * np.exp(c_orn * orn_err_sqr)
-        r_avel = w_avel * np.exp(c_avel * avel_err_sqr)
-        r_end = w_end * np.exp(c_end * end_err_sqr)
-        r_com = w_com * np.exp(c_com * com_err_sqr)
+        r_orn = self.w_orn * np.exp(c_orn * orn_err_sqr)
+        r_avel = self.w_avel * np.exp(c_avel * avel_err_sqr)
+        r_end = self.w_end * np.exp(c_end * end_err_sqr)
+        r_com = self.w_com * np.exp(c_com * com_err_sqr)
         portions = [r_orn, r_avel, r_end, r_com]
 
         reward = r_orn + r_avel + r_end + r_com

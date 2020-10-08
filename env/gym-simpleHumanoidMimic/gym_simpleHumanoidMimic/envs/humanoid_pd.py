@@ -84,7 +84,7 @@ class SimpleHumanoidPD:
         base_orn = links_state[BASE][LINK_WORLD_ORN]
         base_lin_vel = links_state[BASE][LINK_WORLD_LINVEL]
 
-        rel_base_orn = self._orn_along_lin_vel(base_lin_vel)
+        rel_base_orn = self.orn_along_lin_vel(base_lin_vel)
         to_base_aligned = [-rel_base_orn[0], -rel_base_orn[1], -rel_base_orn[2], rel_base_orn[3]]
 
         # base z(1)
@@ -143,7 +143,7 @@ class SimpleHumanoidPD:
                                                                 positionGains=self._kps,
                                                                 velocityGains=self._kds)
 
-    def _orn_along_lin_vel(self, lin_vel):
+    def orn_along_lin_vel(self, lin_vel):
         # orn with x axis along lin_vel and z axis vertical to ground
 
         ux = np.array([lin_vel[0], lin_vel[1], 0.])

@@ -43,8 +43,9 @@ class SimpleHumanoidMimicEnv(gym.Env):
     def step(self, action):
         self._internal_env.update(action, self._nupdate)
 
-        reward, portions = self._internal_env.cal_reward
         obs = self._internal_env.get_obs()
+        reward, portions = self._internal_env.cal_reward(obs, action)
+
         done = self._internal_env.is_end()
         info = {'portions': portions}
         return obs, reward, done, info

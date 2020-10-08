@@ -40,6 +40,7 @@ print('n_steps: 8192')
 print('entropy_c: 0.0001 (default * 1/100)')
 print('obs histogram, action dividing norm')
 print('reward portions recording')
+print('reward_cal revised (relative value)')
 print('=' * 38)
 
 net_arch = [dict(pi=[512, 256], vf=[512, 256])]

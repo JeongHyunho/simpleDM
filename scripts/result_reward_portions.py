@@ -31,7 +31,7 @@ def make_env(rank, seed=0, sub_id=6, enable_draw=True):
     return _init
 
 
-def plot_reward_portions(fullfilename):
+def plot_reward_portions(fullfilename, params):
     with open(fullfilename, 'r') as f:
         step = []
         r_orn = []
@@ -47,15 +47,40 @@ def plot_reward_portions(fullfilename):
             r_end.append(eval(data[3]))
             r_com.append(eval(data[4]))
 
-    fig, ax = plt.subplots()
-    lines = ax.plot(step, r_orn, step, r_avel, step, r_end, step, r_com)
+    r_orn = np.array(r_orn)
+    r_avel = np.array(r_avel)
+    r_end = np.array(r_end)
+    r_com = np.array(r_com)
+
+    fig0, ax0 = plt.subplots()
+    lines0 = ax0.plot(step, r_orn, step, r_avel, step, r_end, step, r_com,
+                      step, r_orn+r_avel+r_end+r_com)
     plt.xticks(np.linspace(0, 10**7, 5),
                ["{:.0f}M".format(x / 10**6) for x in np.linspace(0, 10**7, 5)])
-    plt.legend(lines, ['orientation', 'angular vel', 'end effector', 'com'], loc=1)
-    plt.setp(lines, linewidth=1.0, alpha=0.8)
+    plt.legend(lines0, ['orientation', 'angular vel', 'end effector', 'com', 'total'], loc=1)
+    plt.setp(lines0, linewidth=1.0, alpha=0.8)
     plt.xlabel('update')
     plt.ylabel('rewards')
-    plt.show()
+    plt.show(block=False)
+
+    fig1, ax1 = plt.subplots(nrows=4)
+    ax1[0].plot(step, r_orn/params[0], color='tab:blue')
+    ax1[1].plot(step, r_avel/params[1], color='tab:orange')
+    ax1[2].plot(step, r_end/params[2], color='tab:green')
+    ax1[3].plot(step, r_com/params[3], color='tab:red')
+    ylabels = ['rwd_ori', 'rwd_avel', 'rwd_end', 'rwd_com']
+    for i in range(4):
+        ax1[i].set_ylim(bottom=0., top=1.)
+        ax1[i].set_ylabel(ylabels[i])
+        if i == 3:
+            ax1[i].set_xlabel('update')
+            ax1[i].set_xticks(np.linspace(0, 10**7, 5))
+            ax1[i].set_xticklabels(["{:.0f}M".format(x / 10**6) for x in np.linspace(0, 10**7, 5)])
+            ax1[i].set_yticks([0., 1.])
+        else:
+            ax1[i].set_xticks([])
+            ax1[i].set_yticks([1.])
+    plt.show(block=False)
     pass
 
 
@@ -66,13 +91,17 @@ if __name__ == '__main__':
     warnings.simplefilter(action='ignore', category=Warning)
 
     log_path = os.path.join('/', 'home', 'user', 'Dropbox', 'MATLAB_dropbox', 'DeepMimic', 'log')
-    run_id = 'run_' + '10071436'
+    run_id = 'run_' + '10080054'
     run_file = run_id + '_simpleHumanoid.zip'
-
-    plot_reward_portions(os.path.join(log_path, run_id, 'reward_portions.txt'))
 
     envs = DummyVecEnv([make_env(1)])
     model = PPO2.load(os.path.join(log_path, run_file), envs)
+
+    params = [envs.envs[0]._internal_env.w_orn,
+              envs.envs[0]._internal_env.w_avel,
+              envs.envs[0]._internal_env.w_end,
+              envs.envs[0]._internal_env.w_com]
+    plot_reward_portions(os.path.join(log_path, run_id, 'reward_portions.txt'), params)
 
     obs = envs.reset()
     while True:
