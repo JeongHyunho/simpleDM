@@ -596,13 +596,8 @@ class Runner(object):
             mb_dones.append(self.dones)
             # Clip the actions to avoid out of bound error
             if isinstance(self.env.action_space, gym.spaces.Box):
-                clipped_actions = np.clip(actions, self.env.action_space.low, self.env.action_space.high)
-            # Clip the actions to be (-1, 1)
-            # clipped_actions = np.clip(actions,
-            #                           np.array([-1.] * self.env.action_space.shape[0]),
-            #                           np.array([1.] * self.env.action_space.shape[0]),
-            #                           dtype=np.float32)
-            self.obs[:], rewards, self.dones, infos = self.env.step(clipped_actions)
+                actions = np.clip(actions, self.env.action_space.low, self.env.action_space.high)
+            self.obs[:], rewards, self.dones, infos = self.env.step(actions)
 
             # update observation, action
             for i in range(self.n_envs):
