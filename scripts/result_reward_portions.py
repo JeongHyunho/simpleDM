@@ -91,7 +91,7 @@ if __name__ == '__main__':
     warnings.simplefilter(action='ignore', category=Warning)
 
     log_path = os.path.join('/', 'home', 'user', 'Dropbox', 'MATLAB_dropbox', 'DeepMimic', 'log')
-    run_id = 'run_' + '10080054'
+    run_id = 'run_' + '10032345'
     run_file = run_id + '_simpleHumanoid.zip'
 
     envs = DummyVecEnv([make_env(1)])
@@ -101,7 +101,7 @@ if __name__ == '__main__':
               envs.envs[0]._internal_env.w_avel,
               envs.envs[0]._internal_env.w_end,
               envs.envs[0]._internal_env.w_com]
-    plot_reward_portions(os.path.join(log_path, run_id, 'reward_portions.txt'), params)
+    # plot_reward_portions(os.path.join(log_path, run_id, 'reward_portions.txt'), params)
 
     obs = envs.reset()
     while True:
