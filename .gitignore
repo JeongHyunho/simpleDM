@@ -1,6 +1,6 @@
 data/
 log/*
-!/log/run/run_10080054/*
+!/log/run_10080054/*
 !/log/run_10080054_simpleHumanoid.zip
 motion_data/
 result/
