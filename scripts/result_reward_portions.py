@@ -91,7 +91,7 @@ if __name__ == '__main__':
     warnings.simplefilter(action='ignore', category=Warning)
 
     log_path = os.path.join('/', 'home', 'user', 'Dropbox', 'MATLAB_dropbox', 'DeepMimic', 'log')
-    run_id = 'run_' + '10032345'
+    run_id = 'run_' + '10071436'
     run_file = run_id + '_simpleHumanoid.zip'
 
     envs = DummyVecEnv([make_env(1)])
