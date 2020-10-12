@@ -34,6 +34,7 @@ sub_info.height = SubInfo.Height(sub_index);
 sub_info.mass = SubInfo.Mass(sub_index);
 sub_info.speed = SubInfo.(trial_id)(sub_index);
 sub_info.sex = SubInfo.Sex(sub_index);
+sub_info.PlateID = SubInfo.PlateID{sub_index};
 
 off_set = [SubInfo.Offset1{sub_index}, SubInfo.Offset2{sub_index}];
 
@@ -42,9 +43,9 @@ kinematics.cut_off = 15;
 kinetics.cut_off = 30;
 
 % load data from excel file
-[cap_raw, cap_txt] = xlsread(fullfile(root_dir, 'data', sub_id, ...
+[cap_raw, cap_txt] = xlsread(fullfile(root_dir, 'motion_data', sub_id, ...
     [sub_id, '_', trial_id, '.trc.xls']));
-[pla_raw, pla_txt] = xlsread(fullfile(root_dir, 'data', sub_id, ...
+[pla_raw, pla_txt] = xlsread(fullfile(root_dir, 'motion_data', sub_id, ...
     [sub_id, '_', trial_id, '.anc.xls']));
 
 nMarkers = (size(cap_txt, 2) - 2)/3;
@@ -89,14 +90,22 @@ for i = 1:12
 end
 
 % find HS, TO, and leg of HS from force plate
-[HS, TO, HS_leg] = findGaitHSTO(kinetics, kinematics);
+if strcmp(trial_id, 'T009')
+    [HS, TO] = findRunHSTO(kinetics, kinematics, sub_info.PlateID);
+else
+    [HS, TO, HS_leg] = findGaitHSTO(kinetics, kinematics);
+    kinetics.HS_leg = HS_leg;
+end
 
 kinetics.HS = HS;
 kinetics.TO = TO;
-kinetics.HS_leg = HS_leg;
 
 % find standing duration
-stand_dur = findStandingDur(kinetics);
+if strcmp(trial_id, 'T009')
+    stand_dur = findRunStandingDur(kinetics, sub_info.PlateID);
+else
+    stand_dur = findGaitStandingDur(kinetics);
+end
 
 kinetics.stand_dur = stand_dur;
 

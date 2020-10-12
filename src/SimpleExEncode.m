@@ -1,7 +1,7 @@
 % process mocap data and make sample trajectory
 % write simple humanoid segments info
-sub_num = 6;
-trial_num = 1;
+sub_num = 1;
+trial_num = 9;
 
 % process mocap data
 % write sample pos, GRF, CoM in joson

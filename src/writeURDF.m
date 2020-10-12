@@ -66,15 +66,22 @@ for i = 1:nframe
     trunk_vec(i) = markerVecLen({'V_R_Hip_JC', 'V_L_Hip_JC'}, {'C7', 'STRN'}, i);
     Rthigh_vec(i) = markerVecLen({'V_R_Hip_JC'}, {'V_R_Knee_JC'}, i);
     Rshank_vec(i) = markerVecLen({'V_R_Knee_JC'}, {'V_R_Ankle_JC'}, i);
-    RfootLen_vec(i) = markerVecLen({'R_Heel'}, {'V_R_Toe_Offset'}, i);
-    RfootWid_vec(i) = markerVecLen({'R_Little'}, {'R_Toe'}, i);
+    RfootWid_vec(i) = markerVecLen({'R_Little'}, {'R_Thumb'}, i);
     RfootJC2Heel_vec(i) = JC2HeelLen('R', i);
     
     Lthigh_vec(i) = markerVecLen({'V_L_Hip_JC'}, {'V_L_Knee_JC'}, i);
     Lshank_vec(i) = markerVecLen({'V_L_Knee_JC'}, {'V_L_Ankle_JC'}, i);
-    LfootLen_vec(i) = markerVecLen({'L_Heel'}, {'V_L_Toe_Offset'}, i);
-    LfootWid_vec(i) = markerVecLen({'L_Little'}, {'L_Toe'}, i);
+    LfootWid_vec(i) = markerVecLen({'L_Little'}, {'L_Thumb'}, i);
     LfootJC2Heel_vec(i) = JC2HeelLen('L', i);
+    
+    try
+        RfootLen_vec(i) = markerVecLen({'R_Heel'}, {'R_Toe_Offset'}, i);
+        LfootLen_vec(i) = markerVecLen({'L_Heel'}, {'L_Toe_Offset'}, i);
+    catch
+        RfootLen_vec(i) = markerVecLen({'R_Heel'}, {'R_Toe'}, i);
+        LfootLen_vec(i) = markerVecLen({'L_Heel'}, {'L_Toe'}, i);
+    end
+
 end
 RfootHei_vec = kinematics.R_Heel.Z(kinetics.stand_dur(1):kinetics.stand_dur(2));
 LfootHei_vec = kinematics.L_Heel.Z(kinetics.stand_dur(1):kinetics.stand_dur(2));
@@ -246,39 +253,17 @@ elem_joint.Lknee.axis.setAttribute("xyz", "1.0 0.0 0.0")
 % write revised urdf
 xmlwrite(txt_fullfile, humanoid);
 
-% write z-penetration at 0 frame
+% write shift for z-penetration
 sample = jsondecode(fileread(samplePath));
-
-base_xyz0 = sample.pos.base(1,:)';
-
-RotmBase0 = quat2rotm(sample.orn.base(1,[4,1,2,3]));
-RotmRhip0 = quat2rotm(sample.orn.Rhip(1,[4,1,2,3]));
-RotmRknee0 = axang2rotm([1, 0, 0, sample.orn.Rknee(1)]);
-RotmRankle0 = quat2rotm(sample.orn.Rankle(1,[4,1,2,3]));
-RotmLhip0 = quat2rotm(sample.orn.Lhip(1,[4,1,2,3]));
-RotmLknee0 = axang2rotm([1, 0, 0, sample.orn.Lknee(1)]);
-RotmLankle0 = quat2rotm(sample.orn.Lankle(1,[4,1,2,3]));
 
 r_trunk2Rhip = [0.5*hipJC_xLen, 0, -0.5*s_seg.trunk.length_mean]';
 r_trunk2Lhip = [-0.5*hipJC_xLen, 0, -0.5*s_seg.trunk.length_mean]';
 r_hip2knee = [0, 0, -s_seg.thigh.length_mean]';
 r_knee2ankle = [0, 0, -s_seg.shank.length_mean]';
 
-Rankle0 = base_xyz0+RotmBase0*(r_trunk2Rhip+RotmRhip0*(r_hip2knee+RotmRknee0*r_knee2ankle));
-Lankle0 = base_xyz0+RotmBase0*(r_trunk2Lhip+RotmLhip0*(r_hip2knee+RotmLknee0*r_knee2ankle));
-
-foot_dim_vecs = [0, 1, 0; 1, 0, 0; 0, 0, 1; 0, 1, 0]';
-corner1 = foot_dim_vecs * diag([1, 0.5, -1, -1]) * s_seg.foot.length_mean';
-corner2 = foot_dim_vecs * diag([1, -0.5, -1, -1]) * s_seg.foot.length_mean';
-corner3 = foot_dim_vecs * diag([0, 0.5, -1, -1]) * s_seg.foot.length_mean';
-corner4 = foot_dim_vecs * diag([0, -0.5, -1, -1]) * s_seg.foot.length_mean';
-
-rel_corners = [corner1, corner2, corner3, corner4];
-Rcorner = Rankle0 + RotmRankle0 * rel_corners;
-Lcorner = Lankle0 + RotmLankle0 * rel_corners;
-
-z_pen0 = min([Rcorner(3,:), Lcorner(3,:)]);
-sample.pos.base(:,3) = sample.pos.base(:,3) - z_pen0;
+pens = arrayfun(@(x) calPenetration(x), 1:sample.nframe);
+% sample.pos.base(:,3) = sample.pos.base(:,3) - mean(pens);
+sample.pos.base(:,3) = sample.pos.base(:,3) - pens';       % no pen
 
 % set initial z
 init_xyz = zeros(1,3);
@@ -326,6 +311,41 @@ fprintf('done!\n\n')
             [kinematics.(heel).X(frame), kinematics.(heel).Y(frame), kinematics.(heel).Z(frame)]';
         
         l = vec1'*vec2/norm(vec2);   % projection to longitudinal axis
+    end
+
+
+    function pen = calPenetration(ind)
+        % calculate penetrations of ind# frame
+        base_xyz = sample.pos.base(ind,:)';
+        
+        RotmBase = quat2rotm(sample.orn.base(ind,[4,1,2,3]));
+        RotmRhip = quat2rotm(sample.orn.Rhip(ind,[4,1,2,3]));
+        RotmRknee = axang2rotm([1, 0, 0, sample.orn.Rknee(ind)]);
+        RotmRankle = quat2rotm(sample.orn.Rankle(ind,[4,1,2,3]));
+        RotmLhip = quat2rotm(sample.orn.Lhip(ind,[4,1,2,3]));
+        RotmLknee = axang2rotm([1, 0, 0, sample.orn.Lknee(ind)]);
+        RotmLankle = quat2rotm(sample.orn.Lankle(ind,[4,1,2,3]));
+        
+        Rankle = base_xyz+RotmBase*(r_trunk2Rhip+RotmRhip*(r_hip2knee+RotmRknee*r_knee2ankle));
+        Lankle = base_xyz+RotmBase*(r_trunk2Lhip+RotmLhip*(r_hip2knee+RotmLknee*r_knee2ankle));
+        
+        foot_dim_vecs = [0, 1, 0; 1, 0, 0; 0, 0, 1; 0, 1, 0]';
+        corner1 = foot_dim_vecs * diag([1, 0.5, -1, -1]) * s_seg.foot.length_mean';
+        corner2 = foot_dim_vecs * diag([1, -0.5, -1, -1]) * s_seg.foot.length_mean';
+        corner3 = foot_dim_vecs * diag([0, 0.5, -1, -1]) * s_seg.foot.length_mean';
+        corner4 = foot_dim_vecs * diag([0, -0.5, -1, -1]) * s_seg.foot.length_mean';
+        
+        rel_corners = [corner1, corner2, corner3, corner4];
+        Rcorner = Rankle + RotmBase*RotmRhip*RotmRknee*RotmRankle * rel_corners;
+        Lcorner = Lankle + RotmBase*RotmLhip*RotmLknee*RotmLankle * rel_corners;
+        
+        z_min = min([Rcorner(3,:), Lcorner(3,:)]);
+        
+        if z_min < 0
+            pen = z_min;
+        else
+            pen = 0;
+        end
     end
 end
 
@@ -381,3 +401,4 @@ end
         child = parent;
     end
 end
+

@@ -28,7 +28,8 @@ def make_env(rank, seed=0, sub_id=6, enable_draw=True):
 
 
 if __name__ == '__main__':
-    log_path = os.path.join('/', 'home', 'user', 'Dropbox', 'MATLAB_dropbox', 'DeepMimic', 'log')
+    log_path = os.path.join(os.path.dirname(__file__) + '/..', 'log')
+
     run_id = 'run_' + '10080054'
     run_file = run_id + '_simpleHumanoid.zip'
 

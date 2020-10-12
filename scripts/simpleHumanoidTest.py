@@ -1,3 +1,5 @@
+import time
+
 import pybullet as p
 import pybullet_data
 import numpy as np
@@ -6,10 +8,34 @@ import json
 from gym_simpleHumanoidMimic.envs.simple_humanoid_indices import *
 from env import humanoid_data
 
-sub_id = 6
+
+def drawLinkAngVel(p, body_id, IND, line_id, line_len=0.3, color=(0., 1., 0.), width=1.):
+    link = p.getLinkState(body_id,
+                           IND,
+                           computeForwardKinematics=True,
+                           computeLinkVelocity=True)
+    link_xyz = np.array(link[LINK_WORLD_POS])
+    ang_vel = np.array(link[LINK_WORLD_ANGVEL])
+    if line_id == []:
+        line_id = p.addUserDebugLine(link_xyz,
+                                     link_xyz+line_len*ang_vel,
+                                     lineColorRGB=color,
+                                     lineWidth=width)
+    else:
+        line_id = p.addUserDebugLine(link_xyz,
+                                     link_xyz+line_len*ang_vel,
+                                     lineColorRGB=color,
+                                     lineWidth=width,
+                                     replaceItemUniqueId=line_id)
+    return line_id
+
+
+sub_id = 1
+trial = 9
 data_path = humanoid_data.get_data_path()
 
-sample_file = open(os.path.join(data_path, 'simpleHumanoid3D_sub' + str(sub_id) + '_trial1.json'), 'r')
+sample_file = open(os.path.join(data_path, 'simpleHumanoid3D_sub' + str(sub_id) \
+                                + '_trial' + str(trial) + '.json'), 'r')
 sample_data = json.load(sample_file)
 
 physicsClient = p.connect(p.GUI)
@@ -22,7 +48,7 @@ humanoid_flag = p.URDF_MAINTAIN_LINK_ORDER + p.URDF_USE_SELF_COLLISION + p.URDF_
 planeID = p.loadURDF("plane_implicit.urdf")
 start_pos = sample_data['init_xyz']
 start_orn = p.getQuaternionFromEuler([0, 0, 0])
-humanoid_path = os.path.join(data_path,'simpleHumanoid3D_sub' + str(sub_id) + '.urdf')
+humanoid_path = os.path.join(data_path, 'simpleHumanoid3D_sub' + str(sub_id) + '.urdf')
 humanoid_id = p.loadURDF(humanoid_path, start_pos, start_orn, useFixedBase=True, flags=humanoid_flag)
 
 for i in range(-1, NLINK):
@@ -42,13 +68,25 @@ for i in range(njoint):
                                    velocityGain=1,
                                    force=[0, 0, 0])
 
-joint_list = ['base', 'Rhip', 'Rknee', 'Rankle', 'Lhip', 'Lknee', 'Lankle']
-spherical_ind = [1, 3, 4, 6]
-revolute_ind = [2, 5]
+link_keys = ['base', 'Rhip', 'Rknee', 'Rankle', 'Lhip', 'Lknee', 'Lankle']
 target_orn = [[] for _ in range(NLINK)]
+target_lvel = [[] for _ in range(NLINK)]
+target_avel = [[] for _ in range(NLINK)]
+
+target_frame = 0
+
+RTHIGH_line_id = []
+RSHANK_line_id = []
+RFOOT_line_id = []
 
 while (p.isConnected()):
     target_frame = p.readUserDebugParameter(frame_id)
+    # if target_frame == nframe-1:
+    #     target_frame = 0
+    # else:
+    #     target_frame += 1
+    time.sleep(1/30)
+
     cur_frame = int(np.minimum(target_frame, nframe - 1))
     next_frame = int(np.minimum(cur_frame + 1, nframe - 1))
     frac = target_frame - cur_frame
@@ -57,22 +95,37 @@ while (p.isConnected()):
     next_basePos = np.array(sample_data['pos']['base'][next_frame])
     target_basePos = cur_basePos + frac * (next_basePos - cur_basePos)
 
-    for i in range(len(joint_list)):
-        cur_orn = sample_data['orn'][joint_list[i]][cur_frame]
-        next_orn = sample_data['orn'][joint_list[i]][next_frame]
-        if i in JOINT_SPHERICAL:
-            target_orn[i] = p.getQuaternionSlerp(cur_orn, next_orn, frac)
-        elif i in JOINT_REVOLUTE:
-            target_orn[i] = cur_orn + frac * (next_orn - cur_orn)
+    for ind in range(NLINK):
+        cur_orn = sample_data['orn'][link_keys[ind]][cur_frame]
+        cur_avel = np.array(sample_data['ang_vel'][link_keys[ind]][cur_frame])
+        next_orn = sample_data['orn'][link_keys[ind]][next_frame]
+        next_avel = np.array(sample_data['ang_vel'][link_keys[ind]][next_frame])
+        if ind in JOINT_SPHERICAL:
+            target_orn[ind] = p.getQuaternionSlerp(cur_orn, next_orn, frac)
+        elif ind in JOINT_REVOLUTE:
+            target_orn[ind] = cur_orn + frac * (next_orn - cur_orn)
+        target_avel[ind] = cur_avel + frac * (next_avel - cur_avel)
 
     print("{}".format(target_basePos))
 
-    p.resetBasePositionAndOrientation(humanoid_id, target_basePos, target_orn[0])
-    for i in spherical_ind:
-        p.resetJointStateMultiDof(humanoid_id, i, targetValue=target_orn[i])
-    for i in revolute_ind:
-        th = target_orn[i]
-        p.resetJointState(humanoid_id, i, targetValue=th)
+    p.resetBasePositionAndOrientation(humanoid_id, target_basePos, target_orn[BASE])
+    p.resetBaseVelocity(humanoid_flag, target_lvel[BASE], target_avel[BASE])
+    for ind in JOINT_SPHERICAL:
+        p.resetJointStateMultiDof(humanoid_id,
+                                  ind,
+                                  targetValue=target_orn[ind],
+                                  targetVelocity=target_avel[ind])
+    for ind in JOINT_REVOLUTE:
+        p.resetJointState(humanoid_id,
+                          ind,
+                          targetValue=target_orn[ind],
+                          targetVelocity=target_avel[ind])
+
+    # RTHIGH_line_id = drawLinkAngVel(p, humanoid_id, RTHIGH, RTHIGH_line_id)
+    # RSHANK_line_id = drawLinkAngVel(p, humanoid_id, RSHANK, RSHANK_line_id)
+    # RFOOT_line_id = drawLinkAngVel(p, humanoid_id, RFOOT, RFOOT_line_id)
 
     p.stepSimulation()
+
+
 

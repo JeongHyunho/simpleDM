@@ -37,10 +37,18 @@ sample.orn.Lknee = quat2angle(sample.orn.Lknee);
 
 % sample of GRF
 % sample_GRF: a struct of (R/L) X, Y, Z, HS, TO
-sample.GRF = sampleGRF(kinetics, start_ind, end_ind, num_pts);
+if sub.trial == 9
+    sample.GRF = sampleGRFrun(kinetics, start_ind, end_ind, num_pts, sub.PlateID);
+else
+    sample.GRF = sampleGRFgait(kinetics, start_ind, end_ind, num_pts);
+end
 
 % sample of CoM
-sample.CoM = sampleCoM(sub, sample.time, sample.GRF);
+if sub.trial == 9
+    sample.CoM = sampleCoMrun(sub, sample.time, sample.GRF);
+else
+    sample.CoM = sampleCoMgait(sub, sample.time, sample.GRF);
+end
 
 fprintf('done!\n\n')
 
@@ -132,7 +140,7 @@ end
         end
     end
 
-    function sample = sampleGRF(kinetics, start_ind, end_ind, num_pts)
+    function sample = sampleGRFgait(kinetics, start_ind, end_ind, num_pts)
         % sample one stride GRF from start to end
         % it's linearly interpolated to have points of num_pts
         
@@ -164,18 +172,51 @@ end
             sample.L.TO = round((kinetics.TO(HS_ind)-start_ind)/gap);
         end
     end
-
-    function sample = sampleCoM(sub_info, time, GRF)
-        % sample the center of mass trajectori by integrating acceleration twice
-        % enforce zero displacement at 50%, 100% twice
+    
+        function sample = sampleGRFrun(kinetics, start_ind, end_ind, num_pts, plate_id)
+        % sample one stride GRF from start to end
+        % it's linearly interpolated to have points of num_pts
         
-        acc = ([GRF.R.X; GRF.R.Y; GRF.R.Z] + [GRF.L.X; GRF.L.Y; GRF.L.Z])/sub_info.mass ...
-            - [0, 0, 9.81]';
-        half_ind = floor(numel(time)/2);
-        acc_cum_a = cumtrapz(time(1:half_ind), acc(:,1:half_ind), 2);
-        acc_cum_b = cumtrapz(time(half_ind+1:end), acc(:,half_ind+1:end), 2);
-        vel = [acc_cum_a-mean(acc_cum_a,2), acc_cum_b-mean(acc_cum_b,2)];
-        com = cumtrapz(time, vel, 2);
-        sample = struct('X', com(1,:)', 'Y', com(2,:)', 'Z', com(3,:)');
+        sample = struct('X',[],'Y',[],'Z',[],'HS',[],'TO',[]);
+        
+        % interpolate of XYZ data
+        interp_ind = linspace(1, end_ind-start_ind+1, num_pts);
+        sample.X = interp1(kinetics.(plate_id).X(start_ind:end_ind), interp_ind);
+        sample.Y = interp1(kinetics.(plate_id).Y(start_ind:end_ind), interp_ind);
+        sample.Z = interp1(kinetics.(plate_id).Z(start_ind:end_ind), interp_ind);
+        
+        % assign HS/TO
+        gap = (end_ind-start_ind)/(num_pts-1);
+        HS_ind = find(kinetics.HS == start_ind);
+        sample.HS = [1; round((kinetics.HS(HS_ind+1)-start_ind)/gap)];
+        sample.TO = [round((kinetics.TO(HS_ind)-start_ind)/gap); ...
+            round((kinetics.TO(HS_ind+1)-start_ind)/gap)];
+    end
+
+    function sample = sampleCoMgait(sub_info, time, GRF)
+    % sample the center of mass trajectori by integrating acceleration twice
+    % enforce zero displacement at 50%, 100% twice
+    
+    acc = ([GRF.R.X; GRF.R.Y; GRF.R.Z] + [GRF.L.X; GRF.L.Y; GRF.L.Z])/sub_info.mass ...
+        - [0, 0, 9.81]';
+    half_ind = floor(numel(time)/2);
+    acc_cum_a = cumtrapz(time(1:half_ind), acc(:,1:half_ind), 2);
+    acc_cum_b = cumtrapz(time(half_ind+1:end), acc(:,half_ind+1:end), 2);
+    vel = [acc_cum_a-mean(acc_cum_a,2), acc_cum_b-mean(acc_cum_b,2)];
+    com = cumtrapz(time, vel, 2);
+    sample = struct('X', com(1,:)', 'Y', com(2,:)', 'Z', com(3,:)');
+    end
+    
+    function sample = sampleCoMrun(sub_info, time, GRF)
+    % sample the center of mass trajectori by integrating acceleration twice
+    % enforce zero displacement at 50%, 100% twice
+    
+    acc = [GRF.X; GRF.Y; GRF.Z]/sub_info.mass - [0, 0, 9.81]';
+    half_ind = floor(numel(time)/2);
+    acc_cum_a = cumtrapz(time(1:half_ind), acc(:,1:half_ind), 2);
+    acc_cum_b = cumtrapz(time(half_ind+1:end), acc(:,half_ind+1:end), 2);
+    vel = [acc_cum_a-mean(acc_cum_a,2), acc_cum_b-mean(acc_cum_b,2)];
+    com = cumtrapz(time, vel, 2);
+    sample = struct('X', com(1,:)', 'Y', com(2,:)', 'Z', com(3,:)');
     end
 

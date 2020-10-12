@@ -20,7 +20,7 @@ lin_vel = struct('base', mat_3, 'Rhip', mat_3, 'Rknee', mat_3, ...
 ang_vel = struct('base', mat_3, 'Rhip', mat_3, 'Rknee', mat_3, ...
     'Ranke', mat_3, 'Lhip', mat_3, 'Lknee', mat_3, 'Lankle', mat_3);
 
-joints = struct('pos', pos, 'orn', orn', 'lin_vel', lin_vel, ...
+joints = struct('pos', pos, 'orn', orn', 'lin_v1el', lin_vel, ...
     'ang_vel', ang_vel);
 
 for i = 1:numFrame
@@ -114,8 +114,8 @@ for i = 1:numel(field)
     
     % angular velocity
     for j = 1:numFrame-1
-        [axis, angle] = quatDiff2axang(orn.(field(i))(j,:), ...
-            orn.(field(i))(j+1,:));
+        [axis, angle] = quatDiff2axang(orn.(field(i))(j+1,:), ...
+            orn.(field(i))(j,:));
         ang_vel.(field(i))(j,:) = angle * kin.freq * axis;
     end
 end
@@ -123,7 +123,13 @@ end
 joints.pos = pos;
 joints.orn = orn;
 joints.lin_vel = lin_vel;
-joints.ang_vel = ang_vel;
+joints.ang_vel = low_pass(ang_vel, kin);
+
+% [b, a] = butter(3, 2*kin.cut_off/kin.freq);
+% c = filtfilt(b, a, ang_vel.Rhip);
+% figure, plot(kin.time, [ang_vel.Rhip(:,1), c(:,1)])
+% figure, plot(kin.time, [ang_vel.Rhip(:,2), c(:,2)])
+% figure, plot(kin.time, [ang_vel.Rhip(:,3), c(:,3)])
 
 fprintf('done!\n\n')
 end
@@ -146,13 +152,27 @@ end
 
 function [axis, angle] = quatDiff2axang(q2, q1)
 % (q2 - q1) to axis and angle
-% (q2 - q1) equals to conj(q1)*q2
+% (q2 - q1) equals to q2*conj(q1)
+% q1 = (v1, r1), q2 = (v2, r2)
+% *(v2, r2)*(-v1, r1) = (r1v2-r2v1-v2Xv1, r1r2+v1*v2)
 r1 = q1(4);
 v1 = q1(1:3);
 r2 = q2(4);
 v2 = q2(1:3);
-dq = [r1*v2 - r2*v1 - cross(v1,v2), r1*r2 + v1*v2'];
+dq = [r1*v2 - r2*v1 - cross(v2,v1), r1*r2 + v1*v2'];
 
-angle = 2*acos(dq(4));
-axis = dq(1:3)/sin(angle/2);
+angle = 2*atan2(norm(dq(1:3)), dq(4));
+axis = dq(1:3)/norm(dq(1:3));
 end
+
+function s_new = low_pass(s_old, kin)
+% struct-wise apply low-pass filter
+
+s_new = s_old;
+fields = fieldnames(s_old);
+[b, a] = butter(3, 2*kin.cut_off/kin.freq);
+for i = 1:length(fields)
+    s_new.(fields{i}) = filtfilt(b, a, s_old.(fields{i}));
+end
+end
+

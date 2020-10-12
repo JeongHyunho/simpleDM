@@ -1,6 +1,6 @@
 import glob
 import os, sys
-sys.path.append(os.path.join(os.path.dirname('__file__'), '..'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 import warnings
 from datetime import datetime
@@ -26,8 +26,9 @@ log_path = os.path.join('/', 'home', 'user', 'Dropbox', 'MATLAB_dropbox', 'DeepM
 run_id = 'run_' + datetime.now().strftime('%m%d%H%M')
 
 sub_id = 6
+trial = 1
 enable_draw = False
-env = SimpleHumanoidMimicEnv(sub_id=sub_id, enable_draw=enable_draw)
+env = SimpleHumanoidMimicEnv(sub_id=sub_id, trial=trial, enable_draw=enable_draw)
 
 check_env(env)
 
@@ -36,11 +37,11 @@ print(run_id + ' obs act norm test')
 print('obs normalized, action normalized')
 print('action norm init param revised')
 print('actor: [512, 256], critic: [512, 256]')
-print('n_steps: 8192')
-print('entropy_c: 0.0001 (default * 1/100)')
-print('obs histogram, action dividing norm')
+print('n_steps: 2**13')
+print('entropy_c: 0.01 * 1/100')
 print('reward portions recording')
-print('reward_cal revised (relative value)')
+print('reward_cal revised (joint revisit)')
+print('ang vel fixed')
 print('=' * 38)
 
 net_arch = [dict(pi=[512, 256], vf=[512, 256])]
@@ -51,7 +52,7 @@ policy_kwargs = dict(act_fun=tf.nn.relu,
                      obs_norm_init=init_obs_norm,
                      act_norm_init=init_act_norm)
 
-n_time_step = 10*10**6
+n_time_step = 20*10**6
 
 save_gif_callback = SaveGifCallback(save_freq=int(0.5*10**6),
                                     save_path=os.path.join(log_path, run_id, 'training_videos'),
@@ -65,8 +66,8 @@ callback = CallbackList([save_gif_callback, rwd_term_callback, rwd_rec_callback]
 model = PPO2(NormalMlpPolicy,
              env,
              gamma=0.95,
-             n_steps=8192,
-             ent_coef=0.0001,
+             n_steps=2**13,
+             ent_coef=0.01*1/100,
              nminibatches=4,
              noptepochs=4,
              learning_rate=5.0 * 10 ** (-4),

@@ -7,7 +7,8 @@ from stable_baselines.common.misc_util import set_global_seeds
 from stable_baselines.common.vec_env.dummy_vec_env import DummyVecEnv
 
 from gym_simpleHumanoidMimic.envs import SimpleHumanoidMimicEnv
-from src.custom_callbacks import SaveGifCallback, DiscRwdTerminate, SaveRewardPortionsCallback
+from src.custom_callbacks import SaveGifCallback, DiscRwdTerminate, SaveRewardPortionsCallback, \
+    SaveValuePortionsCallback
 from src.custom_policies import NormalMlpPolicy
 from src.custom_ppo2 import PPO2
 from stable_baselines.common.callbacks import CallbackList
@@ -69,7 +70,9 @@ model = PPO2(NormalMlpPolicy,
 #
 # pass
 
-callback = SaveRewardPortionsCallback(fullfilename='test.txt')
+reward_callback = SaveRewardPortionsCallback(fullfilename='test1.txt')
+value_callback = SaveValuePortionsCallback(fullfilename='test2.txt')
+callback = CallbackList([reward_callback, value_callback])
 
 model.learn(total_timesteps=n_time_step,
             log_interval=100,

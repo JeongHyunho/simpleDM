@@ -4,9 +4,9 @@ function [HS, TO, HS_leg] = findGaitHSTO(kinetics, kinematics)
 % for upright-stand duration
 latency = 10;
 
-anal_range = latency*kinematics.freq:...
-    numel(kinematics.time)-latency*kinematics.freq;
-cap_data = kinematics.L_Heel.Z;
+anal_range = (latency*kinematics.freq:...
+    numel(kinematics.time)-latency*kinematics.freq)+1;
+cap_data = kinematics.L_Heel.Z(anal_range);
 [~, cap_HS] = findpeaks(-cap_data, ...
     'MinPeakHeight', -0.02*max(cap_data)-0.98*min(cap_data));
 win_size = round(0.3*mean(diff(cap_HS)));

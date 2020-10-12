@@ -106,13 +106,39 @@ class DiscRwdTerminate(BaseCallback):
 
 class SaveRewardPortionsCallback(BaseCallback):
     """
-    Callback for saving a model's gif every `save_freq` steps
+    Callback for saving reward portions every n_step
 
     :param fullfilename: (str)
     :param verbose: (boolean)
     """
     def __init__(self, fullfilename: str, verbose=False):
         super(SaveRewardPortionsCallback, self).__init__(verbose)
+        self.fullfilename = fullfilename
+        self.write_flag = False
+        self.count = 1
+
+    def _init_callback(self) -> None:
+        self.writer = open(self.fullfilename, 'w')
+        self.writer.write('step r_orn r_avel r_end r_com\n')
+
+    def _on_rollout_end(self) -> None:
+        step = [self.count * self.locals['self'].n_steps]
+        portions = self.locals['infos'][0]['portions']
+        self.writer.write('%d %.2E %.2E %.2E %.2E\n' % tuple(step + portions))
+        self.count += 1
+
+    def _on_training_end(self) -> None:
+        self.writer.close()
+
+class SaveValuePortionsCallback(BaseCallback):
+    """
+    Callback for saving reward portions every n_step
+
+    :param fullfilename: (str)
+    :param verbose: (boolean)
+    """
+    def __init__(self, fullfilename: str, verbose=False):
+        super(SaveValuePortionsCallback, self).__init__(verbose)
         self.fullfilename = fullfilename
         self.write_flag = False
         self.count = 1

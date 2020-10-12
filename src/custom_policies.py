@@ -63,8 +63,9 @@ class NormalMlpPolicy(ActorCriticPolicy):
 
     def step(self, obs, state=None, mask=None, deterministic=False):
         if deterministic:
-            action, value, neglogp= self.sess.run([self.deterministic_action, self.value_flat, self.neglogp],
+            action, value, neglogp = self.sess.run([self.deterministic_action, self.value_flat, self.neglogp],
                                                    {self.obs_ph: obs})
+            mean_orig = []
         else:
             action, value, neglogp, mean_orig = \
                 self.sess.run([self.action, self.value_flat, self.neglogp, self._policy], {self.obs_ph: obs})

@@ -8,7 +8,7 @@ def draw_env_local_axis(env):
         global coord_id
         coord_id = [x for x in range(NLINK * 3)]
 
-    links = env._p.getLinkStates(env._internal_env._humanoid.sim, range(0, NLINK))
+    links = env._p.getLinkStates(env._internal_env._body.sim, range(0, NLINK))
 
     for i in range(0, NLINK):
         link = links[i]
